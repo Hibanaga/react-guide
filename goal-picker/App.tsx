@@ -27,6 +27,15 @@ export default function App() {
             data={goalList}
             style={styles.goalsList}
             keyExtractor={(item => item.id)}
+            scrollEnabled={!!goalList?.length}
+            ListEmptyComponent={<View style={styles.emptyListWrapper}>
+                <Image
+                    style={styles.emptyListIcon}
+                    source={{
+                        uri: 'https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png',
+                    }}
+                />
+            </View>}
             renderItem={({ item }) => (
                 <View style={styles.goalsItem} onTouchEnd={() => {
                     Alert.alert(
@@ -117,6 +126,13 @@ const styles = StyleSheet.create({
         color: "#fff",
         textAlign: 'center'
   },
+    emptyListWrapper: {
+
+    },
+    emptyListIcon: {
+        height: 250,
+        resizeMode: 'contain',
+    },
     goalsList: {
         width: '80%',
         marginVertical: 48,
