@@ -1,12 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Home from './src/pages/Home';
+import Game from './src/pages/Game';
+import { Routes } from './src/types/routes';
+import Settings from './src/pages/Settings';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+            <Stack.Navigator
+                initialRouteName={Routes.Home}
+            >
+                <Stack.Screen name={Routes.Home} component={Home} options={{ headerShown: false }} />
+                <Stack.Screen name={Routes.Settings} component={Settings} options={{ headerShown: false }} />
+                <Stack.Screen name={Routes.Game} component={Game} />
+            </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 
