@@ -4,5 +4,6 @@ export default {
     },
     icons: {
         settings: { uri: 'https://static-00.iconduck.com/assets.00/settings-icon-2048x2046-cw28eevx.png' },
+        back: { uri: 'https://cdn-icons-png.flaticon.com/512/13/13964.png' },
     }
 }

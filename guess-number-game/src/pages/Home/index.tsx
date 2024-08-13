@@ -5,7 +5,7 @@ import {
     StyleSheet,
     Pressable,
     Image,
-    StatusBar
+    StatusBar, SafeAreaView
 } from 'react-native';
 import { Routes } from '../../types/routes';
 
@@ -19,14 +19,13 @@ const HomeScreen = ({ navigation }) => {
                 style={styles.backgroundImage}
                 resizeMode={'cover'}
             >
-                <View style={styles.wrapper}>
+                <SafeAreaView style={styles.wrapper}>
                     <View style={styles.wrapperActions}>
                         <Pressable style={styles.settingsButton} onPress={() => navigation.navigate(Routes.Settings)}>
-                            <Text style={styles.settingsText}>Settings</Text>
                             <Image source={images.icons.settings} resizeMode={'contain'} style={styles.settingsIcon} />
                         </Pressable>
                     </View>
-                </View>
+                </SafeAreaView>
             </ImageBackground>
 
             <StatusBar barStyle="light-content" />
@@ -39,8 +38,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     wrapper: {
-        paddingVertical: 16,
-        paddingHorizontal: 16,
+        flex: 1,
+        marginVertical: 12,
+        marginHorizontal: 16,
     },
     backgroundImage: {
         flex: 1,
@@ -55,14 +55,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 6,
         paddingVertical: 6,
-        paddingHorizontal: 16,
+        paddingHorizontal: 32,
         borderWidth: 1,
         borderColor: "#fff",
         backgroundColor: '#fff',
-    },
-    settingsText: {
-        paddingRight: 8,
-        fontSize: 16,
     },
     settingsIcon: {
         height: 20,
