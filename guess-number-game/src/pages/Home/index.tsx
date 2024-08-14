@@ -5,7 +5,7 @@ import {
     StyleSheet,
     Pressable,
     Image,
-    StatusBar, SafeAreaView
+    StatusBar, SafeAreaView, TouchableOpacity
 } from 'react-native';
 import { Routes } from '../../types/routes';
 
@@ -21,9 +21,9 @@ const HomeScreen = ({ navigation }) => {
             >
                 <SafeAreaView style={styles.wrapper}>
                     <View style={styles.wrapperActions}>
-                        <Pressable style={styles.settingsButton} onPress={() => navigation.navigate(Routes.Settings)}>
+                        <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate(Routes.Settings)}>
                             <Image source={images.icons.settings} resizeMode={'contain'} style={styles.settingsIcon} />
-                        </Pressable>
+                        </TouchableOpacity>
                     </View>
                 </SafeAreaView>
             </ImageBackground>
