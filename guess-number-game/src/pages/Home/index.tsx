@@ -25,6 +25,11 @@ const HomeScreen = ({ navigation }) => {
                             <Image source={images.icons.settings} resizeMode={'contain'} style={styles.settingsIcon} />
                         </TouchableOpacity>
                     </View>
+                    <View style={styles.wrapperPlay}>
+                        <Pressable onPress={() => navigation.navigate(Routes.Game)}>
+                            <Image source={images.icons.play} style={styles.playIcon} />
+                        </Pressable>
+                    </View>
                 </SafeAreaView>
             </ImageBackground>
 
@@ -47,7 +52,13 @@ const styles = StyleSheet.create({
         paddingVertical: 56
     },
     wrapperActions: {
-        alignItems: 'flex-end'
+        flex: .5,
+        alignItems: 'flex-end',
+    },
+    wrapperPlay: {
+        flex: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     settingsButton: {
         flexDirection: 'row',
@@ -63,6 +74,10 @@ const styles = StyleSheet.create({
     settingsIcon: {
         height: 20,
         width: 20,
+    },
+    playIcon: {
+        width: 126,
+        height: 126,
     },
 })
 

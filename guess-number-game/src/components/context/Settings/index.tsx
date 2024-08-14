@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-interface ISettingsState {
+export interface ISettingsState {
     minValue: number,
     maxValue: number,
 }

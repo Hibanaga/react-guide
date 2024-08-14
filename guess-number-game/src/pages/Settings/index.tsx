@@ -1,8 +1,6 @@
-import { useContext } from 'react';
+import { SetStateAction, useContext, useState } from 'react';
 import {
-    Button,
     Image,
-    Pressable,
     SafeAreaView,
     StatusBar,
     StyleSheet,
@@ -13,11 +11,14 @@ import {
 
 import images from '../../theme/images';
 
-import { AppContext } from '../../components/context/Settings';
+import { AppContext, ISettingsState } from '../../components/context/Settings';
+
 import Counter from '../../components/layout/Counter';
 
 const SettingsScreen = ({ navigation }) => {
     const { settingsState, setSettingsState } = useContext(AppContext);
+
+    const [tempoprarySettings, setTemporarySettings] = useState<ISettingsState | SetStateAction<ISettingsState>>(settingsState);
 
     return (
         <View style={styles.container}>
@@ -30,8 +31,12 @@ const SettingsScreen = ({ navigation }) => {
                     <Text style={styles.headline}>Settings</Text>
                 </View>
                 <View style={styles.wrapperSettings}>
-                    <Counter label={'Select min Value'} value={settingsState.minValue} onChangeValue={(newValue => setSettingsState({ ...settingsState, minValue: newValue }))} />
-                    <Counter label={'Select max Value'} value={settingsState.maxValue} onChangeValue={(newValue => setSettingsState({ ...settingsState, maxValue: newValue }))} />
+                    <Counter label={'Select min Value'} value={tempoprarySettings.minValue} onChangeValue={(newValue => setTemporarySettings({ ...settingsState, minValue: newValue }))} />
+                    <Counter label={'Select max Value'} value={tempoprarySettings.maxValue} onChangeValue={(newValue => setTemporarySettings({ ...settingsState, maxValue: newValue }))} />
+
+                    <TouchableOpacity style={styles.submit} onPress={() => setSettingsState(tempoprarySettings as ISettingsState)}>
+                        <Text style={styles.submitText}>Submit</Text>
+                    </TouchableOpacity>
                 </View>
             </SafeAreaView>
             <StatusBar barStyle={'dark-content'} />
@@ -78,6 +83,19 @@ const styles = StyleSheet.create({
         fontSize: 32,
         width: '100%',
         marginTop: 'auto',
+    },
+    submit: {
+        marginHorizontal: 'auto',
+        backgroundColor: '#fff',
+        width: '100%',
+        paddingVertical: 8,
+        borderRadius: 6,
+        marginTop: 26,
+    },
+    submitText: {
+        textTransform: 'uppercase',
+        fontSize: 20,
+        textAlign: 'center',
     }
 })
 

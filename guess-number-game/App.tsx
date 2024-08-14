@@ -21,7 +21,7 @@ export default function App() {
             >
                 <Stack.Screen name={Routes.Home} component={Home} options={{ headerShown: false }} />
                 <Stack.Screen name={Routes.Settings} component={Settings} options={{ headerShown: false }} />
-                <Stack.Screen name={Routes.Game} component={Game} />
+                <Stack.Screen name={Routes.Game} component={Game} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     </AppContextProvider>
