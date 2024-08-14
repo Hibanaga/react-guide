@@ -1,11 +1,10 @@
-import { FlatList, ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, SafeAreaView, StyleSheet, View } from 'react-native';
 
 import images from '../../theme/images';
-import InputSection from '../../components/module/game/InputSection';
 
 import { useContext, useState } from 'react';
 
-import { AppContext, ISettingsState } from '../../components/context/Settings';
+import { AppContext } from '../../components/context/Settings';
 
 import PreparationStage from '../../components/module/game/stages/Preparation';
 import GameStage from '../../components/module/game/stages/Game';
@@ -18,12 +17,11 @@ enum GameStages {
 }
 
 const GameScreen = ({ navigation }) => {
-    const { settingsState, setSettingsState } = useContext(AppContext);
+    const { settingsState } = useContext(AppContext);
 
     const [activeState, setActiveStage] = useState<GameStages>(GameStages.Preparation);
-    const [guessedList, setGuessedList] = useState([]);
-    const [guessedNumber, setGuessedNumber] = useState('');
     const [searchNumber, setSearchNumber] = useState('');
+    const [numberOfTries, setNumberOfTries] = useState(0);
 
     return (
         <View style={styles.container}>
@@ -35,18 +33,29 @@ const GameScreen = ({ navigation }) => {
                 <SafeAreaView style={styles.wrapper}>
                     {activeState === GameStages.Preparation && (
                         <PreparationStage
+                            navigation={navigation}
                             searchElement={searchNumber}
+                            settingsState={settingsState}
+                            onSetSearchElement={(newValue) => {
+                                setSearchNumber(newValue);
+                                setActiveStage(GameStages.Game);
+                            }}
                         />
                     )}
                     {activeState === GameStages.Game && (
                         <GameStage
+                            searchElement={searchNumber}
                             settingsState={settingsState}
-                            guessedList={guessedList}
-                            guessedNumber={guessedNumber}
-                            onChangeGuessedNumber={nextValue => setGuessedNumber(nextValue)}
+                            numberOfTries={numberOfTries}
+                            onSuccessAction={(numberOfTries) => {
+                                setNumberOfTries(numberOfTries);
+                                setActiveStage(GameStages.Result);
+                            }}
                         />
                     )}
-                    {activeState === GameStages.Result && <ResultStage />}
+                    {activeState === GameStages.Result && <ResultStage
+                        numberOfTries={numberOfTries}
+                    />}
                 </SafeAreaView>
             </ImageBackground>
         </View>

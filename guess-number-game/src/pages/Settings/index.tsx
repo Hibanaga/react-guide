@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     wrapperActions: {
         flex: 1,
         width: '100%',
-        alignItems: 'flex-end',
+        alignItems: 'flex-start',
         marginBottom: 36,
     },
     wrapperSettings: {
