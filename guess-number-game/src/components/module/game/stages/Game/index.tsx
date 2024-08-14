@@ -1,11 +1,10 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import InputSection from '../../InputSection';
 import { ISettingsState } from '../../../../context/Settings';
-import { FunctionComponent, useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { FunctionComponent, useState } from 'react';
 
 interface IGameStage {
-    searchElement: string;
+    searchElement: number;
     settingsState: ISettingsState;
     onSuccessAction: (numberOfTries: number) => void;
 }
@@ -34,7 +33,7 @@ const GameStage: FunctionComponent<IGameStage> = ({ settingsState, searchElement
                     settingsState={settingsState}
                     onSubmit={newValue => {
                         setGuessedList([ newValue, ...guessedList ]);
-                        if (searchElement == newValue) onSuccessAction(newValue);
+                        if (searchElement === newValue) onSuccessAction(guessedList.length);
                     }}
                 />
             </View>

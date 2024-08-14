@@ -9,5 +9,6 @@ export default {
         minus: { uri: 'https://www.iconpacks.net/icons/2/free-minus-icon-3108-thumb.png' },
         plus: { uri: 'https://static-00.iconduck.com/assets.00/plus-icon-512x512-1ksw3ncc.png' },
         play: { uri: 'https://cdn-icons-png.flaticon.com/512/4028/4028535.png' },
+        sun: { uri: 'https://www.iconpacks.net/icons/2/free-sun-icon-1846-thumb.png' }
     }
 }

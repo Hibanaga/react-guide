@@ -20,7 +20,7 @@ const GameScreen = ({ navigation }) => {
     const { settingsState } = useContext(AppContext);
 
     const [activeState, setActiveStage] = useState<GameStages>(GameStages.Preparation);
-    const [searchNumber, setSearchNumber] = useState('');
+    const [searchNumber, setSearchNumber] = useState<number>(settingsState.minValue);
     const [numberOfTries, setNumberOfTries] = useState(0);
 
     return (
@@ -37,7 +37,7 @@ const GameScreen = ({ navigation }) => {
                             searchElement={searchNumber}
                             settingsState={settingsState}
                             onSetSearchElement={(newValue) => {
-                                setSearchNumber(newValue);
+                                setSearchNumber(parseInt(newValue));
                                 setActiveStage(GameStages.Game);
                             }}
                         />
@@ -53,9 +53,16 @@ const GameScreen = ({ navigation }) => {
                             }}
                         />
                     )}
-                    {activeState === GameStages.Result && <ResultStage
-                        numberOfTries={numberOfTries}
-                    />}
+                    {activeState === GameStages.Result && (
+                        <ResultStage
+                            numberOfTries={numberOfTries}
+                            onSubmit={() => {
+                                setActiveStage(GameStages.Preparation);
+                                setSearchNumber(settingsState.minValue);
+                                setNumberOfTries(0);
+                            }}
+                        />
+                    )}
                 </SafeAreaView>
             </ImageBackground>
         </View>
